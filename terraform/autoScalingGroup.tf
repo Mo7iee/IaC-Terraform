@@ -24,21 +24,22 @@ resource "aws_autoscaling_group" "app_asg" {
 
 resource "aws_launch_template" "app_lt" {
   name_prefix   = "app-lt-"
-  image_id      = "ami-0c02fb55956c7d316"   
+  image_id      = "ami-0c02fb55956c7d316"
   instance_type = "t2.micro"
 
-  key_name = "your-keypair-name"  
+  iam_instance_profile {
+    name = aws_iam_instance_profile.asg_instance_profile.name
+  }
 
   network_interfaces {
-    security_groups = [aws_security_group.private_sg.id]
+    security_groups             = [aws_security_group.private_sg.id]
     associate_public_ip_address = false
   }
 
-  lifecycle {
-    create_before_destroy = true
-  }
+  key_name = "key"
+}
 
-  tags = {
-    Name = "app-instance"
-  }
+resource "aws_iam_instance_profile" "asg_instance_profile" {
+  name = "asg-instance-profile"
+  role = aws_iam_role.asg_role.name
 }
