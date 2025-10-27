@@ -59,7 +59,7 @@ Then SSH into it:
 ```bash
 ssh -i <your-keypair.pem> ec2-user@<bastion-public-ip>
 ```
-### 7. Access the Bastion Host
+### 7. Clean Up Resources
 After finishing testing or deploying:
 ```bash
 terraform destroy
