@@ -59,7 +59,21 @@ Then SSH into it:
 ```bash
 ssh -i <your-keypair.pem> ec2-user@<bastion-public-ip>
 ```
-### 7. Clean Up Resources
+### 7. Access private instances through Bastion Host
+Copy .pem key file to Bastion
+```bash
+scp -i <your-keypair.pem> <your-keypair.pem> ec2-user@<bastion-public-ip>:~/
+chmod 400 ~/key.pem
+```
+Then on bastion:
+```bash
+ssh -i ~/key.pem ec2-user@<private-ec2-ip>
+```
+You can also use the -J option from your local machine to jump through the Bastion without copying the key:
+```bash
+ssh -i <your-keypair.pem> -J ec2-user@<bastion-public-ip> ec2-user@<private-ec2-ip>
+```
+### 8. Clean Up Resources
 After finishing testing or deploying:
 ```bash
 terraform destroy
