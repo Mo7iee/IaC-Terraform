@@ -13,7 +13,7 @@ resource "aws_autoscaling_group" "app_asg" {
     version = "$Latest"
   }
 
-  target_group_arns = [aws_lb_target_group.app_tg.arn]  # attach to ALB
+  # target_group_arns = [aws_lb_target_group.app_tg.arn]  # attach to ALB
 
   tag {
     key                 = "Name"
@@ -25,7 +25,7 @@ resource "aws_autoscaling_group" "app_asg" {
 resource "aws_launch_template" "app_lt" {
   name_prefix   = "app-lt-"
   image_id      = "ami-0c02fb55956c7d316"
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
 
   iam_instance_profile {
     name = aws_iam_instance_profile.asg_instance_profile.name
