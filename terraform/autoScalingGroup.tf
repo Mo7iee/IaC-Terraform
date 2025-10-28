@@ -13,7 +13,7 @@ resource "aws_autoscaling_group" "app_asg" {
     version = "$Latest"
   }
 
-  # target_group_arns = [aws_lb_target_group.app_tg.arn]  # attach to ALB
+  target_group_arns = [aws_lb_target_group.app_tg.arn]  # attach to ALB
 
   tag {
     key                 = "Name"

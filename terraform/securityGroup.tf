@@ -30,13 +30,13 @@ resource "aws_security_group" "private_sg" {
   description = "Allow traffic from ALB and Bastion"
   vpc_id      = aws_vpc.vpc.id
 
-  # # Allow HTTP traffic from ALB
-  # ingress {
-  #   from_port       = 80
-  #   to_port         = 80
-  #   protocol        = "tcp"
-  #   security_groups = [aws_security_group.alb_sg.id]  # allow only ALB
-  # }
+  # Allow HTTP traffic from ALB
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]  # allow only ALB
+  }
 
   # Allow SSH from Bastion
   ingress {
